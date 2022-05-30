@@ -1,23 +1,51 @@
-version: "3"
+version: '3.7'
+
 services:
-  hapi-fhir-jpaserver-start:
-    build: .
-    container_name: hapi-fhir-jpaserver-start
-    restart: on-failure
+
+  fhir:
+   # build: .
+    container_name: fhir
+    image: hapiproject/hapi:v5.3.0
     ports:
       - "8080:8080"
-  hapi-fhir-mysql:
-    image: mysql:latest
-    container_name: hapi-fhir-mysql
-    #https://dev.mysql.com/doc/refman/8.0/en/identifier-case-sensitivity.html
-    command: --lower_case_table_names=1
+    configs:
+      - source: hapi
+        target: /Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml
+    environment:
+      profiles.active: r4
+      spring.datasource.url: 'jdbc:postgresql://db:5432/hapi'
+      spring.datasource.username: admin
+      spring.datasource.password: admin
+      spring.datasource.driverClassName: org.postgresql.Driver
+      SPRING_CONFIG_LOCATION: 'file:///Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml'
+      #hapi.fhir.server_adress: "http://diz-ummd-c2123:38082/fhir"
+      # - "tester.server_address=http://localhost:8080/fhir"
+    depends_on:
+      - db
+    #volumes:
+     # - /Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml:/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/application.yaml
+
+  db:
+    image: postgres
     restart: always
     environment:
-      MYSQL_DATABASE: 'hapi'
-      MYSQL_USER: 'admin'
-      MYSQL_PASSWORD: 'admin'
-      MYSQL_ROOT_PASSWORD: 'admin'
-    volumes:
-      - hapi-fhir-mysql:/var/lib/mysql
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: hapi
+    # not needed for networking between containers but here for troubleshooting
+    ports:
+      - "5000:5432"
+
+#configs:
+  #hapi:
+    #external: true
+configs:
+  hapi: 
+  
+    #target: /Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml
+    #external: true
+    file: /Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml
+
 volumes:
-  hapi-fhir-mysql:
+  pgdata:
+

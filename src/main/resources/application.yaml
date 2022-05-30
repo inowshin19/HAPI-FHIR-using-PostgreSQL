@@ -14,12 +14,10 @@ spring:
     check-location: false
     baselineOnMigrate: true
   datasource:
-    url: 'jdbc:h2:file:./target/database/h2'
-    #url: jdbc:h2:mem:test_mem
-    username: sa
-    password: null
-    driverClassName: org.h2.Driver
-    max-active: 15
+    url: 'jdbc:postgresql://localhost:5000/hapi_dstu3'
+    username: admin
+    password: admin
+    driverClassName: org.postgresql.Driver
 
     # database connection pool size
     hikari:
@@ -32,7 +30,7 @@ spring:
       #If using H2, then supply the value of ca.uhn.fhir.jpa.model.dialect.HapiFhirH2Dialect
       #If using postgres, then supply the value of ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
 
-      hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirH2Dialect
+   #   hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirH2Dialect
   #      hibernate.hbm2ddl.auto: update
   #      hibernate.jdbc.batch_size: 20
   #      hibernate.cache.use_query_cache: false
@@ -57,14 +55,14 @@ hapi:
     fhir_version: R4
     ### enable to use the ApacheProxyAddressStrategy which uses X-Forwarded-* headers
     ### to determine the FHIR server address
-    #   use_apache_address_strategy: false
+       #use_apache_address_strategy: false
     ### forces the use of the https:// protocol for the returned server address.
     ### alternatively, it may be set using the X-Forwarded-Proto header.
-    #   use_apache_address_strategy_https: false
+       #use_apache_address_strategy_https: false
     ### enable to set the Server URL
-    #    server_address: http://hapi.fhir.org/baseR4
-    #    defer_indexing_for_codesystems_of_size: 101
-    #    install_transitive_ig_dependencies: true
+        server_address:  http://diz-ummd-c2123:38082/fhir
+        defer_indexing_for_codesystems_of_size: 101
+        install_transitive_ig_dependencies: true
     #    implementationguides:
     ###    example from registry (packages.fhir.org)
     #      swiss:
@@ -109,8 +107,8 @@ hapi:
     #    graphql_enabled: true
     #    narrative_enabled: true
     #    mdm_enabled: true
-#    local_base_urls:
-#      - https://hapi.fhir.org/baseR4
+    #local_base_urls:
+     # -  http://diz-ummd-c2123:38082/fhir
     mdm_enabled: false
     #    partitioning:
     #      allow_references_across_partitions: false
@@ -146,7 +144,7 @@ hapi:
     tester:
       home:
         name: Local Tester
-        server_address: 'http://localhost:8080/fhir'
+        server_address: 'http://diz-ummd-c2123:38082/fhir'
         refuse_to_fetch_third_party_urls: false
         fhir_version: R4
       global:
@@ -159,16 +157,16 @@ hapi:
 #      responses_enabled: true
 #    binary_storage_enabled: true
 #    bulk_export_enabled: true
-#    subscription:
+    subscription:
 #      resthook_enabled: true
 #      websocket_enabled: false
-#      email:
-#        from: some@test.com
-#        host: google.com
-#        port:
-#        username:
-#        password:
-#        auth:
+      email:
+        from: some@test.com
+        host: google.com
+        port:
+        username: admin
+        password: admin
+        auth:
 #        startTlsEnable:
 #        startTlsRequired:
 #        quitWait:
