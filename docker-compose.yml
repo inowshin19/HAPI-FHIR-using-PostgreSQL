@@ -3,26 +3,29 @@ version: '3.7'
 services:
 
   fhir:
-   # build: .
+    #build: .
     container_name: fhir
     image: hapiproject/hapi:v5.3.0
+    
     ports:
       - "8080:8080"
-    configs:
-      - source: hapi
-        target: /Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml
+    #configs:
+     # - source: hapi
+      #  target: /Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml
     environment:
+      
       profiles.active: r4
       spring.datasource.url: 'jdbc:postgresql://db:5432/hapi'
       spring.datasource.username: admin
       spring.datasource.password: admin
       spring.datasource.driverClassName: org.postgresql.Driver
-      SPRING_CONFIG_LOCATION: 'file:///Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml'
+      SPRING_CONFIG_LOCATION: 'file:///config/env/application.yaml'
       #hapi.fhir.server_adress: "http://diz-ummd-c2123:38082/fhir"
       # - "tester.server_address=http://localhost:8080/fhir"
     depends_on:
       - db
-    #volumes:
+    volumes:
+      - /Users/isratnowshin/Documents/hapi/src/main/resources/newapplication.yaml:/config/env/application.yaml
      # - /Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml:/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/application.yaml
 
   db:
@@ -35,16 +38,6 @@ services:
     # not needed for networking between containers but here for troubleshooting
     ports:
       - "5000:5432"
-
-#configs:
-  #hapi:
-    #external: true
-configs:
-  hapi: 
-  
-    #target: /Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml
-    #external: true
-    file: /Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml
 
 volumes:
   pgdata:
