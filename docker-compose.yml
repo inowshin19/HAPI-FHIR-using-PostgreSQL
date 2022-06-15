@@ -32,6 +32,8 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_USER: admin
       POSTGRES_DB: hapi
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     # not needed for networking between containers but here for troubleshooting
     ports:
       - "5000:5432"
