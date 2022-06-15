@@ -22,7 +22,7 @@ services:
     depends_on:
       - db
     volumes:
-      - /Users/isratnowshin/Documents/hapi/src/main/resources/newapplication.yaml:/config/env/application.yaml
+      - ./application.yaml:/config/env/application.yaml
      
 
   db:
