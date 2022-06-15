@@ -1,0 +1,35 @@
+{
+   "resourceType": "Patient",
+    "name": [
+        {
+            "use" : "official",
+            "given" : ["Kafi"],
+            "family" : "Abdullahil"
+
+        }  
+    ],
+    "gender": "male",
+    "birthDate": "1996-10-02",
+    "telecom":[
+        {
+            "value": "129847198",
+            "use": "mobile",
+            "system": "phone"
+        },
+        {
+            "system": "email",
+            "value":  "kafihil96@gmail.com"
+        }
+    ],
+    "address": [
+        {
+            "line": [
+                "Schillerweg"
+            ],
+            "city": "Ctg",
+            "state": "Dhaka",
+            "postalCode": "3289"
+
+        }
+    ]
+}
