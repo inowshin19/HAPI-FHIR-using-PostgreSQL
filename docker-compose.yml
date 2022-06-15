@@ -9,9 +9,7 @@ services:
     
     ports:
       - "8080:8080"
-    #configs:
-     # - source: hapi
-      #  target: /Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml
+    
     environment:
       
       profiles.active: r4
@@ -20,13 +18,12 @@ services:
       spring.datasource.password: admin
       spring.datasource.driverClassName: org.postgresql.Driver
       SPRING_CONFIG_LOCATION: 'file:///config/env/application.yaml'
-      #hapi.fhir.server_adress: "http://diz-ummd-c2123:38082/fhir"
-      # - "tester.server_address=http://localhost:8080/fhir"
+      
     depends_on:
       - db
     volumes:
       - /Users/isratnowshin/Documents/hapi/src/main/resources/newapplication.yaml:/config/env/application.yaml
-     # - /Users/isratnowshin/Documents/hapi/src/main/resources/application.yaml:/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/application.yaml
+     
 
   db:
     image: postgres
