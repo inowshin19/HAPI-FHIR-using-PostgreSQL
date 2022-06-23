@@ -16,7 +16,7 @@ You can find the Prerequisites and Configuartion details here: https://github.co
 
 ## Getting Started
 
-- Clone the project https://ci.diz-ag.med.ovgu.de/etl1/hiwi-projects/hapi-fhir-using-postgres. 
+- Clone the project https://github.com/inowshin19/HAPI-FHIR-using-PostgreSQL.git. 
 - In 'docker-compose.yml' file, change '/Users/isratnowshin/Documents/hapi/src/main/resources/newapplication.yaml' to the path of newapplication.yaml in your local machine.
 - Run the command:
 
