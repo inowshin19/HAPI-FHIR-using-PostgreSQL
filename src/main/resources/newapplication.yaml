@@ -60,7 +60,7 @@ hapi:
     ### alternatively, it may be set using the X-Forwarded-Proto header.
        #use_apache_address_strategy_https: false
     ### enable to set the Server URL
-    server_address:  http://diz-ummd-c2123:38082/fhir
+    server_address:  http://example:8080/fhir
     defer_indexing_for_codesystems_of_size: 101
     install_transitive_ig_dependencies: true
     #    implementationguides:
@@ -144,7 +144,7 @@ hapi:
     tester:
       home:
         name: Local Tester
-        server_address: 'http://diz-ummd-c2123:38082/fhir'
+        server_address: 'http://example:8080/fhir'
         refuse_to_fetch_third_party_urls: false
         fhir_version: R4
       global:
